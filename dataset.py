@@ -35,4 +35,4 @@ class CustomDataset(Dataset):
     
     def scale(self,x):
         robustScaler = RobustScaler()
-        return robustScaler.fit_transform(x.reshape(-1,1))
+        return robustScaler.fit_transform(x.reshape(-1,1)).reshape(-1)
