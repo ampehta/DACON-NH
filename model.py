@@ -9,7 +9,7 @@ class model(nn.Module):
 
         self.feed_forward = nn.Sequential(nn.LayerNorm(d_embed),
                                           nn.Linear(d_embed,d_embed*2),
-                                          nn.GELU()
+                                          nn.GELU(),
                                           nn.Linear(d_embed*2,1),
                                           nn.ReLU())
         self.position_feed_forward = nn.Sequential(nn.LayerNorm(12),
