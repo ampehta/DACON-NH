@@ -8,11 +8,15 @@ class model(nn.Module):
         self.item_embedding = nn.Embedding(item_num,d_embed,max_norm=True)
 
         self.feed_forward = nn.Sequential(nn.LayerNorm(5),
-                                          nn.Linear(5,1),
-                                          nn.GELU())
+                                          nn.Linear(5,10),
+                                          nn.GELU()
+                                          nn.Linear(10,1),
+                                          nn.ReLU())
         self.position_feed_forward = nn.Sequential(nn.LayerNorm(12),
-                                                    nn.Linear(12,1),
-                                                    nn.GELU())
+                                                    nn.Linear(12,24),
+                                                    nn.GELU(),
+                                                    nn.Linear(24,1),
+                                                   nn.ReLU())
 
     def forward(self,cus,item):
         cus = self.cus_embedding(cus)
