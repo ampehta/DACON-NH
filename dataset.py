@@ -1,5 +1,6 @@
 import torch
 from torch.utils.data import Dataset
+from sklearn.preprocessing import RobustScaler
 import pandas as pd
 
 
@@ -7,7 +8,7 @@ class CustomDataset(Dataset):
     def __init__(self, stk_hld_csv):
         self.act_id = stk_hld_csv['act_id'].values
         self.item_cd = stk_hld_csv['iem_cd'].values
-        self.hold_d = stk_hld_csv['hold_d'].values
+        self.hold_d = self.scale(stk_hld_csv['hold_d'].values)
         self.iem_info,self.cus_info = self.load_data()
 
     def __len__(self):
@@ -31,3 +32,7 @@ class CustomDataset(Dataset):
     
     def reshape(self,x):
         return torch.squeeze(torch.LongTensor(x))
+    
+    def scale(self,x):
+        robustScaler = RobustScaler()
+        return robustScaler.fit_transform(x.reshape(-1,1))
