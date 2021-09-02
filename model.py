@@ -1,3 +1,6 @@
+import torch 
+import torch.nn as nn
+
 class model(nn.Module):
     def __init__(self,cus_num=10000, item_num = 3079, d_embed = 5):
         super(model,self).__init__()
