@@ -7,10 +7,10 @@ class model(nn.Module):
         self.cus_embedding = nn.Embedding(cus_num,d_embed,max_norm=True)
         self.item_embedding = nn.Embedding(item_num,d_embed,max_norm=True)
 
-        self.feed_forward = nn.Sequential(nn.LayerNorm(5),
-                                          nn.Linear(5,10),
+        self.feed_forward = nn.Sequential(nn.LayerNorm(d_embed),
+                                          nn.Linear(d_embed,d_embed*2),
                                           nn.GELU()
-                                          nn.Linear(10,1),
+                                          nn.Linear(d_embed*2,1),
                                           nn.ReLU())
         self.position_feed_forward = nn.Sequential(nn.LayerNorm(12),
                                                     nn.Linear(12,24),
